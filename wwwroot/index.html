@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="content1">
+
+    </div>
+    <div id="content2">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    
+    <script type="text/javascript">
+
+        const subject = new rxjs.Subject();
+        subject.subscribe((message) => {
+            content1.innerHTML += `<div>${message}</div>`
+        })
+        subject.subscribe((message) => {
+            content2.innerHTML += `<div><b>${message}</b></div>`
+        })
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/message")
+            .build();
+
+        connection.start()
+            .then(() => {
+                console.log('se ha conectado')
+            }).catch(() => console.error(error.message))
+
+        connection.on("sendMessage", (message) => {
+            console.log(message);
+            subject.next(message)
+        })
+    </script>
+</body>
+</html>

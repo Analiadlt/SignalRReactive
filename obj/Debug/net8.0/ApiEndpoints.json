@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "SignalRReactive.Controllers.BeerController",
+    "Method": "Send",
+    "RelativePath": "api/Beer",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
